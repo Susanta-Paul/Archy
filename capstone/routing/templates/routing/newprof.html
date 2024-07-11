@@ -1,0 +1,143 @@
+{% extends "routing/layout.html" %}
+
+{% block title %}
+  New Profile
+{% endblock %}
+
+{% block style %}
+<style>
+    .sidebar{width:25vw;}
+    .job{
+      height: 89vh;
+      overflow:auto;
+      background-color: #e8e8e8;
+      text-align: center;
+      width: 100vw;
+    }
+    .container input{
+      height: 26px;
+      font-size: 16px;
+      margin: 7px;
+    }
+    label{
+      font-size: 20px;
+    }
+    select{
+      height: 26px;
+      font-size: 16px;
+      margin: 7px;
+    }
+    .container{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn{
+      background-color: red;
+      padding:  5px;
+      border-radius: 7px;
+      font-size: 20px;
+      margin-top: 7px;
+    }
+  @media only screen and (max-width: 1280px){.sidebar{width: 300px;}}
+
+  </style>
+{% endblock %}
+
+{% block main %} 
+        <div class="job">
+          <div style="margin: 20px;"><h2>Job Application form </h2></div>
+          <div class="form">
+            <form action="{% url 'routing:new' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+              <div class="container">
+                <div class="first">
+                  <label for="file-input" >user photo : </label>
+                  <input type="file" id="file-input" accept="image" name="pp" required > <br>
+                  <input type="file" id="file-input" accept="image" name="bann" required > <br>
+                  <label for="username"> Enter Your Name : </label> 
+                  <input type="text" id="username" placeholder="Name" name="name" required><br>
+                  {% if error %}
+                    <b style="color: red;">{{ error }}</b><br>
+                  {% endif %}
+                  <label for="email"> email id :</label>
+                  <input type="email" id="email" placeholder="abc123@gmail.com" size="30" name="email" required /> <br>
+                  <label for="phone"> Phone Number :</label>
+                  <input type="number" id="phone" placeholder="0000000000" size="10" name="phone" required /> <br>
+                  <label for="gender">please select your gender</label>
+                  <select name="gender" id="gender" name="gender" required>
+                     <option value="m">male</option>
+                     <option value="f">female</option>
+                     <option value="o">others</option>
+                  </select> <br>
+                  <label for="password"> enter password : </label> 
+                  <input type="password" id="password" placeholder="password" required><br>
+                  <label for="age"> enter age : </label> 
+                  <input type="number" id="age" placeholder="age" name="age" required><br>
+                  <label for="city"> City : </label> 
+                  <input type="text" id="city" placeholder="City" name="city" required><br>
+                  <label for="country"> Country : </label> 
+                  <input type="text" id="country" placeholder="Country" name="country" required><br>
+                </div>
+                <div class="second">
+                  <label for="service">Service Type:</label>
+                  <select id="service" name="profession" required>
+                      <option value="plumbing">Plumbing</option>
+                      <option value="electrical">Electrical</option>
+                      <option value="cleaning">Cleaning</option>
+                      <option value="gardening">Gardening</option>
+                      <option value="Architects">Architects</option>
+                      <option value="Interior Designer">Interior Designer</option>
+                      <option value="Landscape Designer">Landscape Designer</option>
+                      <option value="Civil Engineers">Civil Engineers</option>
+                      <option value="Mechanical Engineers">Mechanical Engineers</option>
+                      <option value="Electrical Engineer">Electrical Engineer</option>
+                      <option value="Builders">Builders</option>
+                      <option value="Contractors">Contractors</option>
+                      <option value="Project Manager">Project Manager</option>
+                      <option value="Land Surveyors">Land Surveyors</option>
+                      <option value="Geotechnical Engineers">Geotechnical Engineers</option>
+                      <option value="Real Estate Lawyers">Real Estate Lawyers</option>
+                      <option value="Property Surveyor">Property Surveyor</option>
+                      <option value="Decorator">Decorator</option>
+                      <option value="Stylist">Stylist</option>
+                      <option value="Furniture Maker">Furniture Maker</option>
+                      <option value="Upholsterer">Upholsterer</option>
+                      <option value="Painter">Painter</option>
+                      <option value="Lighting Designer">Lighting Designer</option>
+                      <option value="other">Other</option>
+                  </select><br>
+                  Category: 
+                  <select id="service" name="category" required>
+                      <option value="Architecture and Design">Architecture and Design</option>
+                      <option value="Engineering">Engineering</option>
+                      <option value="Construction">Construction</option>
+                      <option value="Surveying">Surveying</option>
+                      <option value="Legal">Legal</option>
+                      <option value="Interior Design">Interior Design</option>
+                      <option value="Furniture and Decor">Furniture and Decor</option>
+                      <option value="Lighting">Lighting</option>
+                      <option value="Painting and Finishing">Painting and Finishing</option>
+                      <option value="other">Other</option>
+                  </select><br>
+                  Type of Service: 
+                  <select id="service" name="service" required>
+                      <option value="Building Services">Building Services</option>
+                      <option value="Decoration services">Decoration Services</option>
+                  </select><br>
+                  Price: <input type="text" name="price" placeholder="e.g 650/day "><br>
+                    <label for="exp"> working experience : </label> 
+                    <textarea id="exp" rows="6" cols="40" name="work"></textarea><br>
+                    <label for="description">Service Description:</label>
+                    <textarea id="description" name="description" rows="6" cols="40" ></textarea><br>
+                    Are you 18+?
+                    <input type="checkbox" id="tos_agree" name="tos_agree" required>
+                    <label for="tos_agree">yes i'm </label><br>
+                </div>
+              </div>
+                <button type="submit" class="btn"> submit </button> 
+            </form>
+          </div>
+        </div>
+      
+{% endblock %}

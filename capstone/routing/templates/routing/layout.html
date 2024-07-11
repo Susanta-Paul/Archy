@@ -1,0 +1,148 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="icon" type="image/x-icon" href="{% static 'routing/archy.jpg' %}">
+  <title>
+    {% block title %}
+    {% endblock %}
+  </title>
+  <link href="{% static 'routing/layout.css' %}" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    a{
+      text-decoration: none;
+      color: white;
+    }
+    .modal{
+      padding: 20px;
+      border-radius: 10px; 
+      position: fixed;  
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .modal input{
+    border: 1px solid black;
+    font-size: 20px;
+    height: 30px;
+    width: 100%;
+    margin: 10px 0px;
+  }
+  .modal select{width: 100%; height: 40px; font-size: 20px; margin: 10px 0px;border: 1px solid black;}
+
+  </style>
+
+  {% block style %}
+  
+  {% endblock %}
+</head>
+
+<body>
+
+  <div class="content">
+    <div class="navbar">
+
+      <div class="logo">
+        <div id="lines" style="color: white; margin: 0px 20px; cursor: pointer;">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+        <a href="{% url 'routing:index' %}"><img src="{% static 'routing/archy.jpg' %}" alt="logo"></a>
+        <a href="{% url 'routing:index' %}"><div id="name">Archy</div></a> 
+      </div>
+
+      <form>
+        <input type="search" placeholder=" Search" id="sear">
+        <input type="submit" value="Search " id="find">
+      </form>
+
+      <div id="pp">
+        <i style="color: white; height: 20px; margin-right:30px;" class="fa-solid fa-magnifying-glass"></i>
+      </div>
+    </div>
+    <dialog class="modal">
+      <form action="{% url 'routing:search' %}" method="post">
+        {% csrf_token %}
+        <div style="display:flex; justify-content: space-between;">
+          <b>Search</b> <br>
+          <i class="fa-solid fa-xmark" id="cancel"></i>
+        </div><hr>
+          <label for="service">Service Type:</label>
+          <select id="service" name="profession" required>
+            <option value="plumbing">Plumbing</option>
+            <option value="electrical">Electrical</option>
+            <option value="cleaning">Cleaning</option>
+            <option value="gardening">Gardening</option>
+            <option value="Architects">Architects</option>
+            <option value="Interior Designer">Interior Designer</option>
+            <option value="Landscape Designer">Landscape Designer</option>
+            <option value="Civil Engineers">Civil Engineers</option>
+            <option value="Mechanical Engineers">Mechanical Engineers</option>
+            <option value="Electrical Engineer">Electrical Engineer</option>
+            <option value="Builders">Builders</option>
+            <option value="Contractors">Contractors</option>
+            <option value="Project Manager">Project Manager</option>
+            <option value="Land Surveyors">Land Surveyors</option>
+            <option value="Geotechnical Engineers">Geotechnical Engineers</option>
+            <option value="Real Estate Lawyers">Real Estate Lawyers</option>
+            <option value="Property Surveyor">Property Surveyor</option>
+            <option value="Decorator">Decorator</option>
+            <option value="Stylist">Stylist</option>
+            <option value="Furniture Maker">Furniture Maker</option>
+            <option value="Upholsterer">Upholsterer</option>
+            <option value="Painter">Painter</option>
+            <option value="Lighting Designer">Lighting Designer</option>
+            <option value="other">Other</option>
+          </select><br>
+
+          Category: 
+          <select id="service" name="category" required>
+              <option value="Architecture and Design">Architecture and Design</option>
+              <option value="Engineering">Engineering</option>
+              <option value="Construction">Construction</option>
+              <option value="Surveying">Surveying</option>
+              <option value="Legal">Legal</option>
+              <option value="Interior Design">Interior Design</option>
+              <option value="Furniture and Decor">Furniture and Decor</option>
+              <option value="Lighting">Lighting</option>
+              <option value="Painting and Finishing">Painting and Finishing</option>
+              <option value="other">Other</option>
+          </select><br>  
+          city: <input type="text" name="city" required ><br>
+          country: <input type="text" name="country" required >   <br>
+          <input type="submit" value="Search" style="background-color: blue;color: white;">
+      </form>
+    </dialog>
+
+  <div class="page">
+    <div class="sidebar">
+      <a href="{% url 'routing:index' %}"><div class="option"><i class="fa-solid fa-house" style="margin-right: 5px;"></i> Home</div></a> <hr>
+      <a href="{% url 'routing:building' %}"><div class="option"><i class="fa-solid fa-building"></i> Building service</div></a> <hr>
+      <a href="{% url 'routing:decoration' %}"><div class="option"><i class="fa-solid fa-hanukiah" style="margin-right: 5px;"></i> Decoration service</div></a> <hr>
+      <a href="{% url 'routing:new' %}"><div class="option"><i class="fa-regular fa-id-badge"></i> Be a Service Provider </div></a><hr>
+      <a href="https://dir.indiamart.com/search.mp?ss=house+materials" target="_main"><div class="option"><i style="margin-right:7px;" class="fa-solid fa-trowel-bricks"></i>Building Materials</div></a><hr>
+      <a href="https://dir.indiamart.com/search.mp?ss=decoration+materials" target="_main"><div class="option"><i style="margin-right:7px;" class="fa-solid fa-trowel-bricks"></i>Decoration Materials</div></a><hr>
+      <a href="{% url 'routing:category' %}"><div class="option"><i class="fa-solid fa-list"></i> Category</div></a><hr>
+      <a><div class="option"><i class="fa-solid fa-gear"></i> Setting</div></a><hr>
+      <a href="{% url 'routing:logout_view' %}"><div class="option"><i class="fa-solid fa-arrow-right-from-bracket"></i> LogOut</div></a><hr>
+    </div>
+
+
+    {% block main %}
+    {% endblock %}
+    
+
+
+
+  </div>
+  {% block script %}
+  {% endblock %}
+
+  <script src="{% static 'routing/layout.js' %}"></script>
+</body>
+
+</html>

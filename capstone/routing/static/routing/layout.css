@@ -1,0 +1,359 @@
+*{
+    margin: 0px;
+    padding: 0px;
+  }
+  body{background-color: #1c1c1c}
+  
+  a{
+    text-decoration: none;
+    color: white;
+  }
+  
+  .navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1c1c1c;
+    padding: 20px 10px;
+    font-size: 28px;
+    width: 97.5vw;
+    position: relative;
+  }
+  img{
+    height: 34px;
+    margin-right: 10px;
+  }
+  .logo{
+    display: flex;
+  }
+  input{
+    height: 40px;
+    font-size: 28px;
+  }
+  #sear{width:55vw;}
+  #name{color: white;}
+  #sear{border-radius: 44px 0px 0px 47px;}
+  #find{border-radius: 0px 44px 47px 0px;}
+  i{margin-right: 14px;}
+  #pp img{border-radius: 50%; height: 37px; margin-right: 20px;}
+  .sidebar{
+    width: 40vw;
+    background-color: #1c1c1c;
+    color: white;
+    font-size: 25px;
+    height: 89vh;
+    position: relative;
+    top: 0px;
+    overflow: hidden;
+    overflow-y: auto;
+  }
+  .option{
+    padding: 28px 32px;
+    cursor: pointer;
+  }
+  .option:hover{
+    box-shadow: 0px 0px 22px 4px  white;
+  }
+  .page{
+    display: flex;
+  }
+  
+  
+  .main{
+    width:100%; 
+    background-color: #d6d6d6;
+    height: 89vh;
+    overflow: hidden;
+    overflow-y: auto;
+    scrollbar-color: transparent transparent;
+  }
+  .main img{
+    width: 97%;
+    height: auto;
+    margin: 8px;
+    border-radius: 7px;
+  } 
+  .everythings{
+    margin-top: 20px;
+    background-color: white;
+    font-family: "Times New Roman", "Times", "serif";
+  }
+  .names{
+    height: 110px;
+    width: 110px;
+    /* background-color: magenta; */
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  #catagory{
+    margin: 20px;
+    padding-top: 15px;
+  }
+  .items{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  #pop{
+    margin-bottom: 20px;
+    font-family: "Times New Roman", "Times", "serif";
+    font-size:25px;
+  }
+  .pop{padding: 20px;}
+  .services{
+    height: 140px;
+    width: 110px ;
+    background-color: yellow;
+    border-radius: 10px;
+    margin: 0px 20px 20px 0px;
+  }
+  .allitems{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .seeall{
+    padding: 4px;
+    background-color: grey;
+    border-radius: 7px;
+    border: 2px solid black;
+    cursor: pointer;
+  }
+  
+  
+  
+  
+  
+  
+  .everything{
+    padding: 25px;
+    background-color: white;
+  }
+  #building{font-size: 40px; text-decoration: underline;}
+  .building{margin-top: 20px;}
+  .box{
+    height: 110px;
+    width: 110px;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px 20px 20px 0px;
+  }
+  .see{
+    background-color: grey;
+    border: 2px solid black;
+    border-radius: 7px;
+    padding: 4px;
+    cursor: pointer;
+  }
+  .service{
+    height: 150px;
+    width: 100px;
+    background-color: green;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px 20px 20px 0px;
+  }
+  #popular{font-size: 30px;}
+  .all{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  #things{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .build-page{
+    height: 89vh;
+    overflow-y: auto;
+  }
+  
+  
+  
+  .info, .about-work, .samples, .review-rating {
+    background-color: #e8e8e8;
+    width: 53vw;
+    margin: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  #banner{
+    width: 100%;
+    height: 230px;
+    background-color: grey;
+  }
+  #banner img{width: 100%; height: 100%; object-fit: cover;}
+  .detail{
+    padding: 20px;
+    padding-top: 50px;
+    font-size: 20px;
+    position: relative;
+    /* background-color: red; */
+    width: 67%;
+  }
+  .detail img{
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid white;
+    position: absolute;
+    top: -120px;
+  }
+  i{
+    margin: 0px; 
+    padding: 0px; 
+    color: gold;
+    border: 1px solid black;
+  }
+  #front{display: flex;}
+  .rating{
+    font-size: 27px;
+    padding: 20px;
+  }
+  b{
+    font-size: 25px; 
+   }
+  #pencil1, #pencil2,#pencil3,#pencil5, #cancel1,#cancel2,#cancel3,#cancel5{
+    position: absolute; 
+    right:50px; 
+    color: black; 
+    border:0px;
+    cursor: pointer;
+  }
+  #about, #work {font-size: 18px;}
+  
+  .about , .work, .sam, .review, .similars{
+    padding: 20px; 
+    position: relative;
+  }
+  .photos{
+    margin: 20px 20px 0px 0px;
+    border-radius: 10px;
+    width: 190px;
+    height: auto;
+  }
+  .image{
+    flex-shrink: 0;
+  }
+  .image img{
+    width: 150px; 
+    height: 150px; 
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid black;
+  }
+  .thoughts{
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  #thou{font-size: 20px; margin-top: 10px;}
+  .others img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  .suggesion{
+    background-color: #e8e8e8;
+    width: 250px;
+    margin: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .others{margin-top: 20px;}
+  #prof{font-size: 20px;}
+  #s-see{
+    font-size: 25px;
+    text-align: center;
+    margin-top: 20px;
+  }
+  .pagers{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .modalInfo, .modalAbout, .modalWork {
+    padding: 20px;
+    border-radius: 10px; 
+    position: fixed;   /* To make the dialog in the center */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .modalInfo::backdrop , .modalAbout::backdrop, .modalWork::backdrop {
+    background: white;
+    opacity: 0.4;
+  }
+  .modalInfo input, .book input {
+    border: 1px solid black;
+    font-size: 20px;
+    height: 20px;
+    width: 100%;
+    margin: 10px 0px;
+  }
+  .modalInfo textarea, .modalAbout textarea, .modalWork textarea, .book{
+    margin: 10px 0px;
+    border: 1px solid black;
+  }
+  .modalInfo select{width: 100%; height: 40px; font-size: 20px; margin: 10px 0px;border: 1px solid black;}
+  #gg{margin-bottom: 10px;}
+  
+  
+  
+  
+  
+  
+  
+  @media only screen and (max-width: 1280px){
+    .sidebar{
+      display: none;
+      z-index: 100;
+      position: absolute;
+      top: 84px;
+      width: 300px; 
+    }
+    .build-page{
+      height: auto;
+      overflow: auto;
+    }
+    .job{width: 100vw; height: 100vh;}
+  }
+  @media only screen and (max-width: 980px){
+    .sidebar{top: 50px;}
+    #sear{width:30vw;}
+    input{
+      height: 30px;
+      font-size: 15px;
+    }
+    img{height: 25px; margin-right: 5px;}
+    .navbar{font-size: 20px; padding: 5px;}
+    i{margin-right: 0px;}
+  }
+  
+  
+  @media only screen and (max-width: 447px){
+    #sear{width:25vw;}
+    input{
+      height: 20px;
+      font-size: 10px;
+    }
+    #pp img{border-radius: 50%; height: 20px; margin-right: 10px;}
+    img{height: 20px; margin-right: 2px;}
+    .sidebar{top: 35px;}
+  }

@@ -1,0 +1,50 @@
+
+{% extends "routing/layout.html" %}
+
+{% load static %}
+
+{% block title %}
+  category
+{% endblock %}
+
+{% block style %}
+  <style>
+    .sidebar{width: 25vw;}
+    .build-page{
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+    }
+    .everything{
+      background-image: url("{% static 'routing/archy.jpg' %}");
+      background-size: cover;
+    }
+    .box{
+      background-image: url("{% static 'routing/Designer (13).png' %}");
+      background-size: cover;
+    }
+    @media only screen and (max-width: 1280px){
+      .sidebar{width: 300px;} 
+      .everything{width:100vw;}
+
+    } 
+  </style>
+{% endblock %}
+
+{% block main %}
+
+  <div class="build-page">
+    <div style="width:75vw; height: 89vh;" class="everything">
+      <div id="building"><b style="color: white; text-decoration: underline; text-decoration-color: white;" > Select by Category  </b></div><br><br>
+      <div class="building">
+        <div class="all">
+
+          {% for category in categories %}
+            <div class="box">
+              <span style="background-color: black;"> <b style="color: yellow;">{{ category }}</b></span> 
+              <div class="see"><a href="{% url 'routing:category' category %}">See All</a></div>
+            </div>
+
+          {% endfor %} 
+
+{% endblock %}

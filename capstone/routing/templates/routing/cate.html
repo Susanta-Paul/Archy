@@ -1,0 +1,50 @@
+
+{% extends "routing/layout.html" %}
+
+{% load static %}
+
+{% block title %}
+  category
+{% endblock %}
+
+{% block style %}
+  <style>
+    .sidebar{width: 22vw;}
+    .build-page{
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+    }
+    .everything{
+      background-image: url("{% static 'routing/archy.jpg' %}");
+      background-size: cover;
+    }
+    .box{
+      background-image: url("{% static 'routing/Designer (13).png' %}");
+      background-size: cover;
+    }
+    @media only screen and (max-width: 1280px){
+      .sidebar{width: 300px;} 
+      .everything{width:100vw;}
+      
+    }
+  </style>
+{% endblock %}
+
+{% block main %}
+
+  <div class="build-page">
+    <div style="width:75vw; height: 89vh;" class="everything">
+      <div id="building"><b style="color: white; text-decoration: underline; text-decoration-color: white;"> Showing Result for "{{ category }}" </b></div>
+      <div class="building">
+        <div class="all">
+
+          {% for profession in professions %}
+            <div class="box">
+              <span style="background-color: black;"> <b style="color: yellow;">{{ profession }}</b></span>  
+              <a href="{% url 'routing:list' profession %}"><div class="see">See All</div></a>
+            </div></a>
+            
+          {% endfor %} 
+
+{% endblock %}

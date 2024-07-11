@@ -1,0 +1,78 @@
+
+{% extends "routing/layout.html" %}
+
+{% load static %}
+
+{% block title %}
+  Building Services
+{% endblock %}
+
+{% block style %}
+  <style>
+    .everything{
+      background-image: url("{% static 'routing/archy.jpg'  %}");
+      background-size: cover;
+    }
+    b{
+      color: white;
+    }
+    .box{
+      background-image: url("{% static 'routing/Designer (13).png' %}");
+      background-size: cover;
+    }
+    .service{
+      background-image: url("{% static 'routing/Designer (14).png' %}");
+      background-size: cover;
+    }
+  </style>
+{% endblock %}
+
+{% block main %}
+ 
+  <div class="build-page">
+    <div class="everything">
+      <div id="building"><b> Building Services </b></div>
+      <div class="building">
+        <div class="all">
+          
+          {% for profession in catag %}
+            <div class="box">
+              <span style="background-color: black;"> <b style="color: yellow;">{{ profession }}</b></span> 
+              <div class="see"><a href="{% url 'routing:list' profession %}">See All</a></div>
+            </div>
+          {% endfor %} 
+          
+        </div>
+      <div class="popular">
+        <div id="popular"><b>Popular Services</b> </div>
+        <div id="things">
+          {% for people in popular %}
+          <a href="{% url 'routing:profile' people.name %}"><div class="service">
+            <div style="color: yellow; background-color: black; font-size: 25px;"><b style="color: yellow"> {{ people.profession }}</b> </div>
+            <div style="color: yellow; background-color: black; font-size: 25px;"><b style="color: yellow"> {{ people.rating }}</b> </div>
+          </div></a>
+          {% endfor %}
+          
+          <div class="service">services</div>
+          <div class="service">services</div>
+          <div class="service">services</div>
+          <div class="service">services</div>
+          <div class="service">services</div>
+          <div class="service">services</div>
+          <div class="service">services</div>
+          <div class="service">services</div>
+          <div class="service">services</div>
+          <div class="service">services</div>
+          <div class="service">services</div>
+          <div class="service">services</div>
+          <div class="service">services</div>
+          <div class="service">services</div>
+          <div class="service">services</div>
+          <div class="service">services</div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

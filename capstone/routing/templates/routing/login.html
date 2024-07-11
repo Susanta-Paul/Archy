@@ -1,0 +1,129 @@
+
+{% load static %}
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="icon" type="image/x-icon" href="{% static 'routing/archy.jpg' %}">
+  <title>Archy</title>
+  <style>
+    body {
+    font-family: 'Poppins', sans-serif; /* Set font to Poppins */
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #AC72A1, #070E2A); /* Gradient background */
+  }
+  
+  .container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #070E2A;
+    border-radius: 10px; /* Curved corners for the box */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #AC72A1;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #AC72A1;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #111112;
+    border-radius: 10px; /* Curved corners for the input fields */
+    box-sizing: border-box;
+  }
+  
+  .Login-button {
+    display: block;
+    margin: 0 auto;
+    background-color: #AC72A1; /* Consistent color with gradient */
+    color: #070E2A;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px; /* Curved corners for the button */
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .Login-button:hover {
+    background-color: #fff; /* Darker shade of the gradient */
+  }
+  
+  .create-an-account {
+    text-align: left; /* Align the text to the right */
+    margin-top: 20px;
+    font-size: 14px;
+    color: #AC72A1;
+  }
+  
+  .create-an-account a {
+    color: #AC72A1; /* Consistent color with gradient */
+    text-decoration: none;
+  }
+  
+  .create-an-account a:hover {
+    text-decoration: underline;
+  }
+  .forget-password {
+    text-align: right; /* Align the text to the right */
+    margin-top: 20px;
+    font-size: 14px;
+    color: #AC72A1;
+  }
+  
+  .forget-password a {
+    color: #AC72A1; /* Consistent color with gradient */
+    text-decoration: none;
+  }
+  
+  .forget-password a:hover {
+    text-decoration: underline;
+  }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1 class="title">Login</h1>
+    <form action="{% url 'routing:login_view' %}" method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required>
+      </div>
+      <button type="submit" class="Login-button">Login</button>
+      {% if message %}
+        <b style="color:red; background-color:yellow; font-size: 20px;"> {{ message }} </b>
+      {% endif %}
+      <p class="create-an-account">
+        <a href="{% url 'routing:register' %}">Don't have an account ?</a>
+      </p>
+      
+    </form>
+  </div>
+</body>
+
+</html>

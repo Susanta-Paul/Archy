@@ -1,0 +1,409 @@
+{% extends "routing/layout.html" %}
+
+{% load static %}
+
+{% block title %}
+  profile 
+{% endblock %}
+
+{% block style %}
+  <style>
+
+    .modalsample, .book, .change, .changepic{
+      padding: 20px;
+      border-radius: 10px; 
+      position: fixed;  
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .book textarea{font-size: 18px;}
+    #book{ cursor: pointer;}
+    .sidebar{
+      width: 20vw;
+    }
+    .pagers{
+      height: 89vh;
+      overflow-y: auto;
+    }
+    .blur{
+      background-color: rgba(0,0,0, 0.4);
+      backdrop-filter: blur(10px);
+      height: 100vh;
+      width: 100vw;
+      position: absolute;
+      top: 0px; left: 0px;
+      z-index: 80;
+      display: none;
+    }
+    #bnr{
+      position: absolute; 
+      right:50px; 
+      top:20px;
+      color: white; 
+      border:0px;
+      cursor: pointer;
+    }
+    .pop{
+      width: auto;
+      height: 95vh;
+      display: none;
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 100;
+      background-color: black;
+      backdrop-filter: blur(100px);
+    }
+    .pop img{height:95%; width: auto;}
+
+    @media only screen and (max-width: 1280px){
+    .sidebar{
+      width: 300px; 
+    }
+  }
+    @media only screen and (max-width: 620px){
+      .pop img{height:auto; width: 95vw;}
+    }
+    @media only screen and (max-width: 819px){
+      .info, .about-work, .samples, .review-rating{
+        width: 90vw;
+      }
+      #sear{width:30vw;}
+      input{
+        height: 30px;
+        font-size: 15px;
+      }
+      img{height: 25px; margin-right: 5px;}
+      .navbar{font-size: 20px; padding: 5px;}
+      i{margin-right: 0px;}
+    }
+
+    @media only screen and (max-width: 447px){
+      #sear{width:25vw;}
+      input{
+        height: 20px;
+        font-size: 10px;
+      }
+      #pp img{border-radius: 50%; height: 20px; margin-right: 10px;}
+      img{height: 20px; margin-right: 2px;}
+      b{
+        font-size: 20px; 
+        }
+      #front{ flex-wrap: wrap;}
+    }
+  </style>
+{% endblock %}
+
+{% block main %}
+  <div class="pagers">
+    <div class="full-profile">
+
+
+      <div style="position: relative;" class="info">
+        <div  id="banner">
+          {% if account.banner %}
+            <img src="{{ account.banner.url }}" alt="banner">
+          {% else %}
+          <img src="https://i.pinimg.com/originals/11/78/cf/1178cf5dd4a6ccd59318305541030945.jpg" alt="banner">
+          {% endif %}
+          <i class="fa-solid fa-pencil" id="bnr"></i>
+        </div>
+        <dialog class="change">
+          <div style="margin-bottom: 20px; display: flex; justify-content: space-between;">
+            Change Banner 
+            <i class="fa-solid fa-xmark" id="cancelbanner"></i>
+          </div>
+          <form action="{% url 'routing:banner' account.name %}" method="post" enctype="multipart/form-data" >
+            {% csrf_token %}
+            <input type="file" name="banner" accept="image/*" required ><br>
+            <input style=" width: 100%; background-color: blue; color: white; " type="submit" value="change Banner">
+          </form>
+        </dialog>
+
+        <dialog class="changepic">
+          <div style="margin-bottom: 20px; display: flex; justify-content: space-between;">
+            Change Profile Picture 
+            <i class="fa-solid fa-xmark" id="cancelpic"></i>
+          </div>
+          <form action="{% url 'routing:picture' account.name %}" method="post" enctype="multipart/form-data" >
+            {% csrf_token %}
+            <input type="file" name="pic" accept="image/*" requierd ><br>
+            <input style=" width: 100%; background-color: blue; color: white; " type="submit" value="change Profile Picture">
+          </form>
+        </dialog>
+        <div id="front"> <!-- Remember to make this flex-wrap while making the full responsive design -->
+          <div class="detail">
+            {% if account.photo %}
+              <img src="{{ account.photo.url }}" alt="profile-picture">
+            {% else %}
+              <img src="https://mlpnk72yciwc.i.optimole.com/cqhiHLc.IIZS~2ef73/w:auto/h:auto/q:75/https://bleedingcool.com/wp-content/uploads/2021/06/Pikachu-color-model-publicity-cel.jpg" alt="profile-picture">
+            {% endif %}
+            
+            <div class="bio">
+              <!-- <b> PIKACHU </b> --> <b> {{ account.name}} </b>
+              <i class="fa-solid fa-pencil" id="pencil1"></i>  
+              <br>
+              <b> {{ account.profession }} </b>
+              <div id="bio"><p> {{ account.bio }} </p></div> <br>
+              <p> {{ account.city }}, {{ account.country }}.  <a style="color: blue;"  href="https://memes.co.in/video/upload/photos/2022/04/VzEYhqkPVeTx9zVzPL8N_19_18dddfb7d3f9af79b133e3ab6c1952c1_image.jpg" target="_main">contect Info</a> </p> <br>
+              <div style="margin-bottom: 10px;" class="price"> <b>₹ {{ account.price }}</b> </div> <br>
+              {% if account.opento %}
+                <span style="padding: 10px; color: white; background-color: blue; border-radius: 10px;"> Avaliable </span>
+                <span id="book" style="margin-left: 15px; padding: 10px; color: black; background-color: hotpink; border-radius: 10px;"> Book </span>
+              {% endif %}
+            </div>
+            <dialog class="book">
+              <form action="{% url 'routing:book' account.name  %}" method="post">
+                {% csrf_token %}
+                <div style="display: flex; justify-content: space-between;" id="gg">
+                  <b>Book</b>
+                  <i class="fa-solid fa-xmark" id="cancelbook"></i>
+                </div>
+                Your Name: <input type="text" name="name" required>
+                Your Address: <input type="text" name="address" required>
+                Contact Number: <input type="number" name="contact" required>
+                Event Description: <textarea name="description" rows="10" cols="80" required > Write Here.. </textarea>
+                <input style="padding: 7px; height: auto;color:white; background-color: blue;" type="submit" value="send">
+              </form>
+            </dialog>
+          </div>
+          <span class="rating">
+            <div>
+              <b>Overall Rating: </b>
+            </div>
+            <span id="stars">
+              {% for i in rating %}
+                <i class="fa-solid fa-star"></i>
+              {% endfor %}
+              <!-- <i class="fa-solid fa-star-half"></i> -->
+            </span> <b> {{ account.rating }} </b>
+          </span>
+        </div>
+
+        <div class="dilog">
+          <dialog class="modalInfo">
+            <div id="gg">
+              <b>Edit intro</b>
+              <i class="fa-solid fa-xmark" id="cancel1"></i>
+            </div>
+            <hr>
+            <form action="{% url 'routing:profile' account.name %}" method="post">
+              {% csrf_token %}
+              <b>Name:</b> <input type="text" placeholder="Name" value="{{ account.name }}" name="name" required> <br>
+              <b>Profession:</b> <input required type="text" placeholder="Profession" value="{{ account.profession }}" name="profession"> <br>
+              <b>Bio: </b><textarea rows="10" cols="60" name="bio" > {{ account.bio }} </textarea> <br>
+              <b>Country:</b> <input required type="text" placeholder="Country/Region" value="{{ account.country }}" name="country"> <br>
+              <b>City:</b> <input required type="text" placeholder="City" value="{{ account.city }}" name="city"> <br>
+              <b>Price:</b> <input required type="text" placeholder="Price" value="{{ account.price }}" name="price"> <br>
+              <b>Contact details:</b> <input required type="number" placeholder="Contacts" value="{{ account.phone }}" name="contact">
+              <b>Are you Avaliable for work ? </b>
+              {% if account.opento %}
+                <select name="open" required>
+                  <option >True</option>
+                  <option value="default">False</option>
+                </select>
+              {% else %}
+                <select name="open">
+                  <option>True</option>
+                  <option value="default">False</option>
+              </select>
+              {% endif %}
+
+              <input type="submit" value="Save" style="background-color: blue; color: white;">
+            </form>
+          </dialog>
+        </div>
+      </div>
+
+      <div class="about-work">
+        <div class="about" >
+          <b>About </b> <i class="fa-solid fa-pencil" id="pencil2"></i> <br> <br>
+          <P id="about"> {{ account.about }} </P>
+          <div>
+            <dialog class="modalAbout">
+              <form action="{% url 'routing:about' account.name %}" method="post">
+                {% csrf_token %}
+                <i class="fa-solid fa-xmark" id="cancel2"></i>
+                <b>About</b> 
+                <textarea rows="40" cols="100" name="about">{{ account.about }} </textarea>
+                <input type="submit" value="Save" style="width: 100%; background-color: blue; color: white;">
+              </form>
+            </dialog>
+          </div>
+        </div>
+
+        <div class="work" >
+          <b>Work Experience </b> <i class="fa-solid fa-pencil" id="pencil3"></i> <br> <br>
+          <P id="work"> {{ account.work }} </P>
+        </div>
+        <div>
+          <dialog class="modalWork">
+            <form action="{% url 'routing:work' account.name %}" method="post">
+              {% csrf_token %}
+              <i class="fa-solid fa-xmark" id="cancel3"></i>
+              <b>Work Experience </b> 
+              <textarea rows="40" cols="100" name="work"> {{ account.work }} </textarea>
+              <input type="submit" value="Save" style="width: 100%; background-color: blue; color: white;">
+            </form>
+          </dialog>
+        </div>
+      </div>
+
+      <div class="samples">
+        <div class="sam">
+          <b>Sample Photos </b>  
+          <i style="position: absolute;right:50px;color: black;border:0px;cursor: pointer;" class="fa-solid fa-pencil" id="pencil5"></i>
+          <div class="photo">
+
+            {% for photo in photos %}
+              <img class="photos" src="{{ photo.photo.url }}"> 
+            {% endfor %}
+            
+          </div>
+        </div>
+        <div>
+          <dialog class="modalsample">
+            <form action="{% url 'routing:sample' account.name %}" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              <i class="fa-solid fa-xmark" id="cancel5"></i>
+              <b>Add Photos </b>  <br><br>
+              <input type="file" accept="image/*" required name="upload" ><br><br><br>
+              <input type="submit" value="Post" style="width: 100%; background-color: blue; color: white;">
+            </form>
+          </dialog>
+        </div>
+      </div>
+
+      <div class="review-rating">
+        <div class="review"> <div style="margin-bottom: 25px;"><b>Rating and Review </b></div><br>
+          <form action="{% url 'routing:review' account.name %}" method="post">
+            {% csrf_token %}
+            <textarea required style="font-size: 25px;" rows="2" cols="30" name="review"></textarea>
+            <input type="number" placeholder="Rating" name="rate" required ><br>
+            <b>*Rating must be between 0 to 5 </b>
+            <input style="padding: 7px; font-size:15px; border-radius: 7px; color: white; background-color: red;" type="submit" value="comment">
+          </form><br><br><hr><br><br>
+          
+          {% for review in reviews %}
+            <div class="thoughts">
+              <div class="image">
+                <img src="https://4kwallpapers.com/images/wallpapers/ash-ketchum-pikachu-2048x2048-10894.jpeg"> <br>
+                <b> {{ request.user.username }} </b>
+              </div>
+              <div class="write">
+                <b> {{ review.rating }} <i class="fa-solid fa-star"></i> </b>
+                <p id="thou">{{ review.review }}</p>
+              </div>
+            </div>
+          {% empty %}
+            <b>NO COMMENTS YET... </b>
+          {% endfor %}
+
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="suggesion">
+      <div class="similars">
+        <b id="prof" >Other similar profiles</b>
+        {% for other in others %}
+          <a style="color:black;" href="{% url 'routing:profile' other.name %}">
+          <div class="others">
+            {% if other.photo %}
+              <img src="{{ other.photo.url }}" > <b>{{ other.name }}</b> 
+            {% else %}
+              <img src="{% static 'routing/archy.jpg' %}" > <b>{{ other.name }}</b>
+            {% endif %}
+              <hr>
+          </div></a>
+        {% endfor %}
+
+        <div id="s-see"><a style="color: blue;" href="https://www.google.com" target="_main">Show all</a></div>
+      </div>
+
+    </div>
+  </div>
+{% endblock %}
+
+
+{% block script %}
+<div class="blur"></div>
+  <div class="pop">
+    <div> <i style="text-align:right; color: white; cursor: pointer;" class="fa-solid fa-xmark" id="cancel6"></i></div><br>
+    <img src="" alt="image" >
+  </div>
+
+  <script>
+    let pencil5=document.querySelector("#pencil5");
+    let modalsample=document.querySelector(".modalsample");
+    let cancel5=document.querySelector("#cancel5");
+  
+    pencil5.addEventListener("click",()=>{
+        modalsample.showModal();
+    })
+    cancel5.addEventListener("click",()=>{
+        modalsample.close();
+    })
+    
+images=document.querySelectorAll(".photos");
+cancel6=document.querySelector("#cancel6");
+
+images.forEach(image=>{
+  image.addEventListener("click", ()=>{
+    document.querySelector(".pop").style.display="block";
+    document.querySelector(".blur").style.display="block";
+    document.querySelector(".pop img").src= image.getAttribute("src");
+  })
+});
+
+cancel6.addEventListener("click",()=>{
+  document.querySelector(".pop").style.display="none";
+  document.querySelector(".blur").style.display="none";
+})
+
+document.querySelector(".blur").addEventListener("click",()=>{
+  document.querySelector(".pop").style.display="none";
+  document.querySelector(".blur").style.display="none";
+})
+
+try{
+  let book=document.querySelector("#book");
+  let cbook=document.querySelector("#cancelbook");
+  let di=document.querySelector(".book");
+
+  book.addEventListener("click", ()=>{
+    di.showModal();
+  });
+  cbook.addEventListener("click", ()=>{
+    di.close();
+});
+}
+catch{pass}
+
+
+let banner=document.querySelector("#bnr");
+let change=document.querySelector(".change");
+let cross=document.querySelector("#cancelbanner");
+
+banner.addEventListener("click", ()=>{
+  change.showModal();
+});
+cross.addEventListener("click",()=>{
+  change.close();
+})
+
+let img=document.querySelector(".detail img");
+let changepic=document.querySelector(".changepic");
+let cancelpic=document.querySelector("#cancelpic");
+
+img.addEventListener("click", ()=>{
+  changepic.showModal();
+})
+cancelpic.addEventListener("click", ()=>{
+  changepic.close();
+})
+
+  </script>
+{% endblock %}
